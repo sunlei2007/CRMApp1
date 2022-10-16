@@ -10,6 +10,8 @@ namespace CRMApp.Controllers
         [HttpPost("Login")]
         private string Login(string user,string password)
         {
+            string str = "";
+            string str2 = "";
             return "";
         }
     }
