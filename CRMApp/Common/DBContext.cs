@@ -1,9 +1,9 @@
 ﻿using CRMAppEntity;
 using Microsoft.EntityFrameworkCore;
 using System;
-namespace CRMApp
+namespace CRMApp.Common
 {
-    public class DBContext: DbContext
+    public class DBContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,5 +16,5 @@ namespace CRMApp
         public virtual DbSet<CreditCard> CreditCardSet { get; set; }
         public virtual DbSet<User> UserSet { get; set; }
     }
-   
+
 }

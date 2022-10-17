@@ -1,0 +1,28 @@
+﻿@page "/" 
+@using CRMAppEntity
+@inject NavigationManager nv;
+@inject HttpClient Http;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage;
+
+<h3>Login</h3>
+<input @bind-value="UserName" />
+<input @bind-value="Password" />
+<button style="width:60px;height:40px" @onclick="OnClick"></button>
+@code {
+    private string UserName { get; set; }
+    private string Password { get; set; }
+    private async Task OnClick()
+    {
+        GlobalVariable.UserName = "sun";
+        // Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer","token");
+        JsonTemplate<string> result = await Http.GetFromJsonAsync<JsonTemplate<string>>($"https://localhost:44365/api/Login/Login/{UserName}/{Password}");
+
+        await localStorage.SetItemAsync("Token",result.Content);
+        string token=await localStorage.GetItemAsync<string>("Token");
+        
+        nv.NavigateTo("index");
+    }
+
+    
+}
+
