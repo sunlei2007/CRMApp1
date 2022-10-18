@@ -1,17 +1,34 @@
 ﻿@inherits LayoutComponentBase
+@inject CRMApp.Auth.ILoginServices loginService;
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <Authorized>
+            <div class="page">
+                <div class="sidebar">
+                    <NavMenu />
+                </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+                <main>
+                    <div class="top-row px-4">
+                        <button style="width:60px;height:40px" @onclick="OnClick">LogOut</button>
+                    </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+                    <article class="content px-4">
+                        @Body
+                    </article>
+                </main>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <Login/>
+        </NotAuthorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+@code
+{
+   public async Task OnClick()
+   {
+        await loginService.Logout();
+   }
+}

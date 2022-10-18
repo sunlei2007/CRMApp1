@@ -1,4 +1,5 @@
-﻿
+﻿namespace CRMWebClient.Common
+{
     public class JsonTemplate<T>
     {
         public string? StatusCode { get; set; }
@@ -8,3 +9,4 @@
 
 
     }
+}

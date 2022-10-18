@@ -1,4 +1,4 @@
-﻿namespace CRMWebClient
+﻿namespace CRMWebClient.Common
 {
     public class GlobalVariable
     {
