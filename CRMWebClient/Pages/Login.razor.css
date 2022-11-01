@@ -1,0 +1,14 @@
+﻿.main-div {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(img/login-bg.jpg) center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-div {
+    border-radius: 4px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 500px;
+}

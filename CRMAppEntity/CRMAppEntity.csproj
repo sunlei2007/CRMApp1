@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Blazored.Modal" Version="7.1.0" />
+  </ItemGroup>
+
 </Project>

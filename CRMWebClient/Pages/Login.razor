@@ -1,28 +1,17 @@
 ﻿@page "/login" 
+
 @inject NavigationManager nv;
 @inject HttpClient Http;
 @inject Blazored.LocalStorage.ILocalStorageService localStorage;
 @inject CRMApp.Auth.ILoginServices loginService;
-
-<h3>Login</h3>
-<input @bind-value="UserName" />
-<input @bind-value="Password" />
-<button style="width:60px;height:40px" @onclick="OnClick"></button>
-@code {
-    private string UserName { get; set; }
-    private string Password { get; set; }
-    private async Task OnClick()
-    {
-
-        JsonTemplate<string> result = await Http.GetFromJsonAsync<JsonTemplate<string>>($"https://localhost:44365/api/Login/Login/{UserName}/{Password}");
-
-        if (result.StatusCode == "200")
-        {
-            GlobalVariable.UserName = UserName;
-            await loginService.Login(result.Content);
-        }
-    }
-
-    
-}
-
+ 
+<div class="main-div">
+    <form onsubmit="return false" action="##">
+    <div class="flex-column d-grid gap-3 login-div">
+      <input type="text" class="form-control"  placeholder="Enter username" name="uname" @bind-value="UserName" required>
+      <input type="password" class="form-control" placeholder="Enter password" name="uname" @bind-value="Password" required>
+      <button class="btn btn-primary btn-block" type="submit"  @onclick="OnClick">Login</button>      
+    </div>
+    </form>
+</div>
+ 

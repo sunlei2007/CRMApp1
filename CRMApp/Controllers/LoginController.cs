@@ -52,7 +52,7 @@ namespace CRMApp.Controllers
                 }
                 else
                 {
-                    return new JsonTemplate<string> { StatusCode = "301", Msg = "success", Content = "用户或密码不正确！" };
+                    return new JsonTemplate<string> { StatusCode = "301", Msg = "用户或密码不正确！", Content = "" };
                     //string json = JsonConvert.SerializeObject(new JsonTemplate { StatusCode = "301", Msg = "success", Content = "用户或密码不正确！" });
                     //return json;
 

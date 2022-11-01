@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Blazored.Modal;
 using CRMApp.Auth;
 using CRMWebClient;
 using CRMWebClient.Common;
@@ -18,5 +19,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<JwtAuthenticatorProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticatorProvider>(provider => provider.GetRequiredService<JwtAuthenticatorProvider>());
 builder.Services.AddScoped<ILoginServices, JwtAuthenticatorProvider>(provider => provider.GetRequiredService<JwtAuthenticatorProvider>());
- 
+
+builder.Services.AddBlazoredModal();
+
 await builder.Build().RunAsync();

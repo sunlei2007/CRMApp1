@@ -1,0 +1,11 @@
+﻿<p class="@CssClass">
+    @Msj
+</p>
+<button @onclick="ModalInstance.CloseAsync" class="btn btn-secondary">Close</button>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public string Msj { get; set; }
+}
