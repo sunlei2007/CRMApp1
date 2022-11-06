@@ -19,6 +19,6 @@ namespace CRMAppEntity
         public string HolderName { get; set; }
         public string CustomerGuid { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        
     }
 }

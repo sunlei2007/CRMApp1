@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMApp", "CRMApp\CRMApp.csproj", "{0E596CF9-C1B5-4328-84C3-E400B5FF64E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMApp", "CRMApp\CRMApp.csproj", "{0E596CF9-C1B5-4328-84C3-E400B5FF64E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMAppEntity", "CRMAppEntity\CRMAppEntity.csproj", "{003A62CB-B463-4114-B2DA-ABE409D01920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMAppEntity", "CRMAppEntity\CRMAppEntity.csproj", "{003A62CB-B463-4114-B2DA-ABE409D01920}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDesigner", "..\ConsoleApp\ConsoleApp1\DataDesigner.csproj", "{7B2C8370-F976-41C3-BAF1-93CCE7F3F247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMWebClient", "CRMWebClient\CRMWebClient.csproj", "{1773EA15-0B4F-4E73-A40D-E4038713AD57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMWebClient", "CRMWebClient\CRMWebClient.csproj", "{1773EA15-0B4F-4E73-A40D-E4038713AD57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
