@@ -1,0 +1,28 @@
+﻿@inject HttpClient Http
+<EditForm Context="myContext" Model="@customer" OnValidSubmit="SubmitForm">
+    <div style="overflow-y: auto; max-height: 650px;">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row" style="margin-left:0; margin-right:0;">
+            <div class="container mt-3">
+                <div class="form-group mb-3">
+                    <label>Name:</label>
+                    <InputText required class="form-control" @bind-Value="customer.Name"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Address:</label>
+                    <InputText required class="form-control" @bind-Value="customer.Address" />
+                </div>
+            </div>
+            <div class="container mt-3 dialog-btn-div">
+                <button @onclick="Cancel" type="button" class="btn btn-secondary">Cancel</button>
+                <button class="btn btn-primary"  type="submit">
+                    <span class="oi oi-check" aria-hidden="true"></span> Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+ 

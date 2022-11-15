@@ -34,5 +34,74 @@ namespace CRMApp.Controllers
             return new JsonTemplate<List<Customer>> { StatusCode = "200", Msg = "success", Content = result ?? new List<Customer>() };
 
         }
+        [HttpPost("AddCustomer")]
+        public async Task<JsonTemplate<string>> AddCustomer([FromBody] Customer customer)
+        {
+            try
+            {
+                using (DBContext ctx = new())
+                {
+                    customer.Guid = Guid.NewGuid().ToString();  
+                    await ctx.CustomerSet.AddAsync(customer);
+                    await ctx.SaveChangesAsync();
+                }
+                return new JsonTemplate<string> { StatusCode = "200", Msg = "Add success！", Content = "success" };
+            }
+            catch (Exception ex)
+            {
+                return new JsonTemplate<string> { StatusCode = "302", Msg = ex.ToString(), Content = "error" };
+            }
+        }
+
+        [HttpPut("EditCustomer")]
+        public async Task<JsonTemplate<string>> EditCustomer([FromBody] Customer customer)
+        {
+            try
+            {
+                using (DBContext ctx = new())
+                {
+
+                    Customer? record = await (from e in ctx.CustomerSet
+                                   where e.Id==customer.Id
+                                   select e).FirstOrDefaultAsync();
+
+                    if(record == null)
+                    {
+                        return  new JsonTemplate<string> { StatusCode = "303", Msg = "No the data！", Content = "error" };
+                    }
+                    record.Name = customer.Name;
+                    record.Address = customer.Address;
+                    await ctx.SaveChangesAsync();
+                }
+                return new JsonTemplate<string> { StatusCode = "200", Msg = "Update success！", Content = "success" };
+            }
+            catch (Exception ex)
+            {
+                return new JsonTemplate<string> { StatusCode = "302", Msg = ex.ToString(), Content = "error" };
+            }
+        }
+        [HttpDelete("DelCustomer/{customerId}")]
+        public async Task<JsonTemplate<string>> DelCustomer(string customerId)
+        {
+            try
+            {
+                var list = customerId.Split(",");
+                using (DBContext ctx = new())
+                {
+
+                    List<Customer>? records = await (from e in ctx.CustomerSet
+                                              where list.Contains(e.Id.ToString())
+                                              select e).ToListAsync<Customer>();
+
+                    ctx.CustomerSet.RemoveRange(records);
+                    await ctx.SaveChangesAsync();
+                }
+                return new JsonTemplate<string> { StatusCode = "200", Msg = "Update success！", Content = "success" };
+            }
+            catch (Exception ex)
+            {
+                return new JsonTemplate<string> { StatusCode = "302", Msg = ex.ToString(), Content = "error" };
+            }
+        }
     }
 }

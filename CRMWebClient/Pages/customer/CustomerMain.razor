@@ -1,11 +1,22 @@
 ﻿@page "/customer/CustomerMain"
 @inject HttpClient Http
-
+@inject IJSRuntime JS
+ 
 <PageTitle>CustomerManage</PageTitle>
-<div class="query-area"><input type="text" name="customerName" @bind-value="CustomerName" class="query-condition" placeholder="Enter customer name" /><input type="text" name="addr" @bind-value="Address" class="query-condition" placeholder="Enter customer address" /><button class="query-btn">Search</button></div>
+<div class="query-area">
+    <input type="text" name="customerName" @bind-value="CustomerName" class="query-condition" placeholder="Enter customer name" />
+    <input type="text" name="addr" @bind-value="Address" class="query-condition" placeholder="Enter customer address" />
+    <div class="container">
+    <button class="btn btn-primary" @onclick="SearchClick">Search</button>
+    <button class="btn btn-primary" @onclick="AddClick">Add</button>
+    <button class="btn btn-primary" @onclick="EditClick">Edit</button>
+        <button class="btn btn-primary" @onclick="DelClick">Delete</button>
+    </div>
+</div>
 <table class="table table-hover table-bordered" style="margin-top:20px;">
     <thead class="table-light ">
         <tr>
+            <th style="width:30px"><input type="checkbox" class="form-check-input chk-all"  /></th>
             <th style="width:200px">Name</th>
             <th style="width:400px">Address</th>
         </tr>
@@ -14,6 +25,7 @@
         @foreach (var item in customerList)
         {
             <tr>
+                <td><input type="checkbox" class="form-check-input tbl-chk" value="@item.Id" /></td>
                 <td>@item.Name</td>
                 <td>@item.Address</td>
             
