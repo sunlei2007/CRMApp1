@@ -45,9 +45,9 @@ namespace CRMWebClient.Pages.customer
         {
   
             var modal = ModalService.Show<Loading>("", SharedModalOptions.modalOptionsWait);
-
-            Customer customer = new Customer() { Name = this.CustomerName, Address = this.Address };
-            var result = await Http.PostAsJsonAsync<Customer>("https://localhost:7197/api/Customer/GetCustomers", customer);
+            string str = this.CustomerName;
+            //Customer customer = new Customer() { Name = this.CustomerName, Address = this.Address };
+            var result = await Http.GetFromJsonAsync<JsonTemplate<List<Customer>>>($"https://localhost:7197/api/Customer/GetCustomers?name={this.CustomerName}&address={this.Address}");
 
             if (result == null)
             {
@@ -56,22 +56,22 @@ namespace CRMWebClient.Pages.customer
                 return;
             }
 
-            JsonTemplate<List<Customer>> reponseContent = JsonSerializer.Deserialize<JsonTemplate<List<Customer>>>(result.Content.ReadAsStringAsync().Result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-            switch (reponseContent.StatusCode)
+            //JsonTemplate<List<Customer>> reponseContent = JsonSerializer.Deserialize<JsonTemplate<List<Customer>>>(result.Content.ReadAsStringAsync().Result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            switch (result.StatusCode)
             {
                 case "200": //成功
-                    customerList =reponseContent.Content;                 
+                    customerList = result.Content;
                     modal.Close();
                     break;
                 default: //其它服务器错误
-                    ModalService.Show<ModalInfo>("Error", SharedModalOptions.SetParameterModalInfo(reponseContent.Msg, "alert alert-danger"), SharedModalOptions.modalOptionsInfo);
+                    ModalService.Show<ModalInfo>("Error", SharedModalOptions.SetParameterModalInfo(result.Msg, "alert alert-danger"), SharedModalOptions.modalOptionsInfo);
                     modal.Close();
                     break;
             }
         }
 
-        
-            public async Task SearchClick()
+
+        public async Task SearchClick()
         {
             await SearchData();
             StateHasChanged();

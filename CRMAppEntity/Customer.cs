@@ -11,7 +11,8 @@ namespace CRMAppEntity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Customer
     {
        
@@ -21,6 +22,7 @@ namespace CRMAppEntity
         }
     
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Address { get; set; }
         public string Guid { get; set; }

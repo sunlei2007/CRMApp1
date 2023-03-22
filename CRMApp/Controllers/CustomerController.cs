@@ -12,8 +12,8 @@ namespace CRMApp.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        [HttpPost("GetCustomers")]
-        public async Task<JsonTemplate<List<Customer>>> GetCustomers([FromBody] Customer customer)
+        [HttpGet("GetCustomers")] //这个特性后面没加/{name}/{address}，那么前端则以?name=''&address=''方式传参数
+        public async Task<JsonTemplate<List<Customer>>> GetCustomers(string? name,string? address)
         {
             List<Customer> result;
             using (DBContext ctx = new())
@@ -21,12 +21,11 @@ namespace CRMApp.Controllers
 
                var exp = from e in ctx.CustomerSet
                          select e;
-                customer.Name = customer.Name.Trim();
-                customer.Address = customer.Address.Trim();
-                if (customer.Name != "" && customer.Name.Length>0)
-                   exp = exp.Where(e => e.Name.Contains(customer.Name));
-                if (customer.Address != "" && customer.Address.Length > 0)
-                   exp = exp.Where(e => e.Address.Contains(customer.Address));
+                
+                if (!string.IsNullOrEmpty(name))
+                   exp = exp.Where(e => e.Name.Contains(name));
+                if (!string.IsNullOrEmpty(address))
+                   exp = exp.Where(e => e.Address.Contains(address));
 
                 result = await exp.ToListAsync();
             }
@@ -35,11 +34,11 @@ namespace CRMApp.Controllers
 
         }
         [HttpPost("AddCustomer")]
-        public async Task<JsonTemplate<string>> AddCustomer([FromBody] Customer customer)
+        public async Task<JsonTemplate<string>> AddCustomer([FromBody] Customer customer) //因为名字加了require特性，所以当前端名字为空，则系统自动返回错误给前端，根本不执行以下方法体
         {
             try
-            {
-                using (DBContext ctx = new())
+            {              
+                    using (DBContext ctx = new())
                 {
                     customer.Guid = Guid.NewGuid().ToString();  
                     await ctx.CustomerSet.AddAsync(customer);
